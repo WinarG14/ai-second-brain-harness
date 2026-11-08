@@ -1,0 +1,3 @@
+# Extra personal-data patterns for core/scripts/validate.py rule 4. One regex per line.
+# Case is ignored. Put your own name, user name and colleague names here. This file is
+# in local/, so it is never committed.

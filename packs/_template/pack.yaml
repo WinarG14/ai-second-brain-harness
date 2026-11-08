@@ -1,0 +1,8 @@
+name: <pack-name>          # kebab-case, same as the folder name
+scope: <one line: which domain or kind of work this pack covers>
+owner: <role, not a person's name>
+status: draft              # draft | active | retired
+requires:
+  connectors: []           # tools the pack skills need, for example [jira, google-workspace]
+  external: []             # paths set in local/settings/external.yaml, for example [shared_folder]
+triggers: []               # words that route a request or a new item to this pack
