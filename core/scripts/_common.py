@@ -1,7 +1,13 @@
 """Shared helpers for the core scripts. Standard library only (no PyYAML)."""
 from __future__ import annotations
 import re
+import sys
 from pathlib import Path
+
+# On Windows, piped output uses the ANSI code page, and print() fails on a letter outside it.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, 'reconfigure'):
+        _stream.reconfigure(encoding='utf-8', errors='replace')
 
 ROOT = Path(__file__).resolve().parents[2]
 KNOWLEDGE_DIRS = ('processes', 'knowledge', 'recipes')
@@ -51,7 +57,7 @@ def parse_yaml(text: str) -> dict:
 
 
 def frontmatter(path: Path) -> dict | None:
-    text = path.read_text(encoding='utf-8')
+    text = path.read_text(encoding='utf-8-sig')  # a PowerShell 5.1 file can start with a BOM
     if not text.startswith('---\n'):
         return None
     end = text.find('\n---', 4)

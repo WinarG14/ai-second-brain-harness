@@ -10,7 +10,7 @@ Rules:
   5. A superseded file has superseded_by, and that path exists.
 Also: workspace.yaml and pack.yaml have their required keys.
 
-Usage: python3 core/scripts/validate.py </dev/null
+Usage: python3 core/scripts/validate.py
 """
 from __future__ import annotations
 import re
@@ -37,7 +37,7 @@ def private_patterns() -> list[tuple[str, re.Pattern]]:
     f = ROOT / 'local/settings/privacy_patterns.txt'
     if not f.is_file():
         return []
-    lines = [x.strip() for x in f.read_text(encoding='utf-8').splitlines()]
+    lines = [x.strip() for x in f.read_text(encoding='utf-8-sig').splitlines()]
     return [('private pattern', re.compile(x, re.I)) for x in lines if x and not x.startswith('#')]
 
 
@@ -175,6 +175,9 @@ def main() -> int:
     fails += scan_personal()  # rule 4
     fails += core_standalone()
 
+    for rel in ('local/settings/autonomy.md', 'local/settings/owner.md'):
+        if not (ROOT / rel).is_file():
+            print(f'WARN {rel} is missing. Run python3 core/scripts/setup.py to restore it.')
     for f in fails:
         print(f'FAIL {f}')
     n = sum(len(pack_files(p)) for p in packs if not p.name.startswith('_'))

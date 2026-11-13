@@ -16,7 +16,7 @@ Log it in `local/logs/learning_log.md`.
 
 ## Checks
 
-1. Run `python3 core/scripts/validate.py </dev/null`. Each FAIL is a finding.
+1. Run `python3 core/scripts/validate.py`. Each FAIL is a finding.
 2. Superseded files: `status: superseded` and `valid_from` more than 12 weeks ago.
    Propose a move to `packs/<pack>/_archive/`.
 3. Review dates: files in packs whose `review_by` date is in the past. Propose a check, not a move.

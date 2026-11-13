@@ -18,7 +18,8 @@ when you do not know.
 
 ## Start with only what the task needs
 
-1. For a real task, read `core/boot_card.md` once per session.
+1. For a real task, read `core/boot_card.md` once per session. If `local/` does not exist,
+   run `python3 core/scripts/setup.py` first (on Windows: `py -3 core/scripts/setup.py`).
 2. Read `core/router.md` to map the intent to a pack, a recipe or a skill.
 3. Read the pack `INDEX.md`, then only the matching file. Do not read every pack.
 4. If nothing matches, use the `find-knowledge` skill.
@@ -58,14 +59,19 @@ item. Never edit a generated file. Personal state goes only in `local/`. Deliver
 - Verify that a tool works in the current session before you rely on it. A past result is not
   evidence. If a tool is not available, use an authorized fallback or make a labelled draft.
 - Use subagents only when the user or a skill authorizes them.
+- Write text files as UTF-8 without a byte-order mark (BOM). In Windows PowerShell 5.1, do not use
+  `Set-Content` or `Out-File`: their default turns non-ASCII letters into "?", and `-Encoding utf8`
+  adds a BOM. Use `[IO.File]::WriteAllText($path, $text, [Text.UTF8Encoding]::new($false))`.
 
 ## Session wrap-up
 
-For real work, use the `wrap-up` skill. Skip it for a short question.
+After real work, always run the `wrap-up` skill automatically, without asking first. Its granted
+records in `local/settings/autonomy.md` need no confirmation. Skip it only for a short question
+with no lasting result.
 
 ## Verification and done
 
-Run `python3 core/scripts/validate.py </dev/null` after a change to knowledge, skills, policy or
+Run `python3 core/scripts/validate.py` after a change to knowledge, skills, policy or
 indexes. Never say that a test passed if you did not run it. A task is done when the result
 has a source or is marked uncertain, the verification is reported, the gates are kept, and
 each blocker is explicit.
