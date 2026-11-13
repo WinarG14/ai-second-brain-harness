@@ -17,7 +17,7 @@ whether to run it, and never skip it. Skip it only for a short question with no 
    question. Only a write outside the grants (for example `add-knowledge` into a pack) needs the
    user's OK: put all of those in one question at the end. The granted records are still written
    even if the user does not answer that question. If `local/settings/autonomy.md` is missing,
-   run `bash core/scripts/setup.sh` to restore it, then continue.
+   run `python3 core/scripts/setup.py` to restore it, then continue.
 3. Work worth a record: append one dated line to `local/STATUS.md`.
 4. A completed deliverable or a useful evaluation: add one row to `local/logs/run_ledger.md`.
    Name the recipe or skill that you used, or `none`.

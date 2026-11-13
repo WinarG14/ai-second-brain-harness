@@ -30,8 +30,8 @@ See `BOOTSTRAP.md`.
 
 | Command | What it does |
 |---|---|
-| `bash core/scripts/setup.sh` | Copies `templates/` to `local/`, makes `work/` folders, builds indexes |
+| `python3 core/scripts/setup.py` | Copies `templates/` to `local/`, makes `work/` folders, builds indexes |
 | `python3 core/scripts/build_indexes.py --write` | Pack indexes, merged registries, skill pointers |
 | `python3 core/scripts/build_boot_card.py --write` | Boot card from active packs and recipes |
-| `python3 core/scripts/validate.py </dev/null` | The 5 validator rules, with the personal-data scan |
+| `python3 core/scripts/validate.py` | The 5 validator rules, with the personal-data scan |
 | `python3 core/scripts/find_knowledge.py <words>` | Search titles, then bodies |

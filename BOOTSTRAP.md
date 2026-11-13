@@ -8,10 +8,12 @@ external system.
 1. Install Python 3.10 or later and git. The scripts use the Python standard library only.
 2. Install Claude Code, Codex, or both.
 3. Clone the repository to a folder that a cloud drive does not sync.
+4. On Windows, use `py -3` (or `python`) in each command where this guide says `python3`.
+   The name `python3` can open the Microsoft Store and not run Python. No step needs bash.
 
 ## 2. Run setup
 
-1. Run `bash core/scripts/setup.sh`.
+1. Run `python3 core/scripts/setup.py`.
 2. Setup copies `templates/` to `local/`, makes the `work/` folders, and builds the indexes.
 3. If `local/` exists, setup adds only the template files that are missing. It never
    overwrites an existing file, and it prints each file that it adds.
@@ -62,13 +64,13 @@ Set these in your runtime scheduler. They only read and report. They never apply
 
 ## 8. Checks
 
-1. Run `python3 core/scripts/validate.py </dev/null`. It must show PASS.
+1. Run `python3 core/scripts/validate.py`. It must show PASS.
 2. Run the validator after each change to knowledge, skills, policy or indexes, and before each commit.
 
 ## 9. Updates
 
 1. Run `git pull`. Your `local/` and `work/` folders do not change.
-2. Run `bash core/scripts/setup.sh` again. It keeps your files in `local/` and makes new work
+2. Run `python3 core/scripts/setup.py` again. It keeps your files in `local/` and makes new work
    folders and indexes.
 3. Setup also adds each new file from `templates/` that is missing in `local/`. It never
    overwrites an existing file.

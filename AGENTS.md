@@ -18,7 +18,8 @@ when you do not know.
 
 ## Start with only what the task needs
 
-1. For a real task, read `core/boot_card.md` once per session.
+1. For a real task, read `core/boot_card.md` once per session. If `local/` does not exist,
+   run `python3 core/scripts/setup.py` first (on Windows: `py -3 core/scripts/setup.py`).
 2. Read `core/router.md` to map the intent to a pack, a recipe or a skill.
 3. Read the pack `INDEX.md`, then only the matching file. Do not read every pack.
 4. If nothing matches, use the `find-knowledge` skill.
@@ -69,7 +70,7 @@ with no lasting result.
 
 ## Verification and done
 
-Run `python3 core/scripts/validate.py </dev/null` after a change to knowledge, skills, policy or
+Run `python3 core/scripts/validate.py` after a change to knowledge, skills, policy or
 indexes. Never say that a test passed if you did not run it. A task is done when the result
 has a source or is marked uncertain, the verification is reported, the gates are kept, and
 each blocker is explicit.

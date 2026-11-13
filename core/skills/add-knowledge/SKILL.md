@@ -70,7 +70,7 @@ The content follows `core/policy/provenance.md`. Shared files contain no persona
 3. For a process, add a row to `packs/<pack>/registry_rows/where_to_look.md`.
    For a skill, add a row to `packs/<pack>/registry_rows/router.md`.
 4. Run `python3 core/scripts/build_indexes.py --write` and `python3 core/scripts/build_boot_card.py --write`.
-5. Run `python3 core/scripts/validate.py </dev/null`. Fix each FAIL before you report.
+5. Run `python3 core/scripts/validate.py`. Fix each FAIL before you report.
 6. Run `python3 core/scripts/find_knowledge.py <title words>` and show that the new file is found.
 7. Report the path and the validator result in one or two lines.
 

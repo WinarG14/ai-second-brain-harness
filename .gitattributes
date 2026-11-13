@@ -1,0 +1,2 @@
+# Keep LF in the repo and in each checkout, so bash and the generated-file checks work on Windows.
+* text=auto eol=lf

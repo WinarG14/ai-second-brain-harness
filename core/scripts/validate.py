@@ -10,7 +10,7 @@ Rules:
   5. A superseded file has superseded_by, and that path exists.
 Also: workspace.yaml and pack.yaml have their required keys.
 
-Usage: python3 core/scripts/validate.py </dev/null
+Usage: python3 core/scripts/validate.py
 """
 from __future__ import annotations
 import re
@@ -177,7 +177,7 @@ def main() -> int:
 
     for rel in ('local/settings/autonomy.md', 'local/settings/owner.md'):
         if not (ROOT / rel).is_file():
-            print(f'WARN {rel} is missing. Run bash core/scripts/setup.sh to restore it.')
+            print(f'WARN {rel} is missing. Run python3 core/scripts/setup.py to restore it.')
     for f in fails:
         print(f'FAIL {f}')
     n = sum(len(pack_files(p)) for p in packs if not p.name.startswith('_'))

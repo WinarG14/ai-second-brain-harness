@@ -27,7 +27,7 @@ Turn captured corrections into changes that later tasks can find and use.
    - Recipe: a dated refinement and a `valid_from` update.
    - Memory: one `local/memory/` file and its `INDEX.md` line.
 5. List patterns with no occurrence in the last eight weeks for review, not for removal.
-6. Run `python3 core/scripts/validate.py </dev/null`. List each file in a pack whose
+6. Run `python3 core/scripts/validate.py`. List each file in a pack whose
    `review_by` date is in the past. Do not change those files.
 
 ## Report
