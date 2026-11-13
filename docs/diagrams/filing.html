@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>How new knowledge gets filed and kept tidy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --paper: #f5f5f5; --ink: #2d3142; --muted: #4f5d75; --soft: #7a8399;
+      --accent: #eb6c36; --accent-tint: rgba(235,108,54,0.08); --link: #2e5aa8;
+      --sans: 'Geist', system-ui, sans-serif; --serif: 'Instrument Serif', serif;
+      --mono: 'Geist Mono', ui-monospace, monospace;
+    }
+    body { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+    .frame { width: 100%; max-width: 1200px; }
+    .eyebrow { margin-bottom: 0.5rem; color: var(--muted); font: 500 0.66rem var(--mono); letter-spacing: 0.18em; text-transform: uppercase; }
+    h1 { margin-bottom: 1.5rem; color: var(--ink); font: 400 clamp(1.5rem, 2.4vw + 0.75rem, 2rem)/1.15 var(--serif); letter-spacing: -0.02em; }
+    .diagram-container { overflow-x: auto; }
+    svg { display: block; width: 100%; min-width: 1536px; }
+    .ring { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+    .spoke { fill: none; stroke: var(--soft); stroke-width: 1; stroke-dasharray: 5 4; }
+    .station { fill: var(--paper); stroke: var(--ink); stroke-width: 1; }
+    .station.focal { fill: var(--accent-tint); stroke: var(--accent); stroke-width: 1.2; }
+    .hub { fill: var(--ink); }
+    .node-name { fill: var(--ink); font: 600 12px var(--sans); text-anchor: middle; }
+    .focal-name { fill: var(--accent); }
+    .sublabel { fill: var(--soft); font: 400 8px var(--mono); text-anchor: middle; }
+    .hub-name { fill: var(--paper); font: 600 16px var(--sans); text-anchor: middle; }
+    .hub-sub { fill: var(--paper); opacity: 0.72; font: 400 8px var(--mono); text-anchor: middle; }
+    .arrow-label { fill: var(--soft); font: 400 8px var(--mono); letter-spacing: 0.06em; text-anchor: middle; }
+      .zone { fill: rgba(45,49,66,0.03); stroke: rgba(45,49,66,0.30); stroke-width: 1; stroke-dasharray: 4 4; }
+    .zone-label { fill: var(--muted); font: 500 8px var(--mono); letter-spacing: 0.14em; }
+    .node { fill: #ffffff; stroke: var(--ink); stroke-width: 1; }
+    .node.store { fill: rgba(45,49,66,0.05); stroke: var(--muted); }
+    .node.focal { fill: var(--accent-tint); stroke: var(--accent); stroke-width: 1.2; }
+    .tag { fill: none; stroke: rgba(45,49,66,0.40); stroke-width: 0.8; }
+    .tag-text { fill: var(--muted); font: 500 7px var(--mono); letter-spacing: 0.08em; text-anchor: middle; }
+    .conn { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+    .legend { fill: var(--muted); font: 400 8px var(--mono); letter-spacing: 0.08em; }
+      .grid { stroke: rgba(45,49,66,0.08); stroke-width: 0.8; }
+    .axis { stroke: rgba(45,49,66,0.25); stroke-width: 1; }
+    .tick { fill: var(--muted); font: 400 8px var(--mono); }
+    .cat { fill: var(--ink); font: 600 11px var(--sans); }
+    .callout { fill: var(--muted); font: italic 400 16px var(--serif); }
+    .lane-label { fill: var(--muted); font: 500 8px var(--mono); letter-spacing: 0.14em; }
+  </style>
+</head>
+<body>
+  <main class="frame">
+    <p class="eyebrow">AI second brain</p>
+    <h1>How new knowledge gets filed and kept tidy</h1>
+    <div class="diagram-container">
+    <svg viewBox="0 0 1536 432" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="filing-title filing-desc">
+      <title id="filing-title">How new knowledge gets filed and kept tidy</title>
+      <desc id="filing-desc">Swimlane with three lanes. You ask the agent to remember something. The agent chooses a type and a pack, looks for a copy and waits for your OK, then writes the file. Scripts rebuild the indexes. Once a week the agent lists files to move, and you approve the batch.</desc>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+      </defs>
+      <rect width="1536" height="432" fill="#f5f5f5"/>
+      <rect x="16" y="64" width="1504" height="100" fill="rgba(45,49,66,0.03)" data-lint="ignore"/>
+      <line x1="16" y1="164" x2="1520" y2="164" stroke="rgba(45,49,66,0.12)" stroke-width="1" data-lint="ignore"/>
+      <text x="28" y="116" class="lane-label" font-size="8">YOU</text>
+      <rect x="16" y="164" width="1504" height="100" fill="#f5f5f5" data-lint="ignore"/>
+      <line x1="16" y1="264" x2="1520" y2="264" stroke="rgba(45,49,66,0.12)" stroke-width="1" data-lint="ignore"/>
+      <text x="28" y="216" class="lane-label" font-size="8">AGENT</text>
+      <rect x="16" y="264" width="1504" height="100" fill="rgba(45,49,66,0.03)" data-lint="ignore"/>
+      <line x1="16" y1="364" x2="1520" y2="364" stroke="rgba(45,49,66,0.12)" stroke-width="1" data-lint="ignore"/>
+      <text x="28" y="316" class="lane-label" font-size="8">SCRIPTS</text>
+      <line x1="16" y1="64" x2="1520" y2="64" stroke="rgba(45,49,66,0.12)" stroke-width="1" data-lint="ignore"/>
+      <path class="conn" d="M192 140 V204 Q192 212 200 212 H294" marker-end="url(#arrow)"/>
+      <path class="conn" d="M440 212 H470" marker-end="url(#arrow)"/>
+      <path class="conn" d="M544 184 V120 Q544 112 552 112 H646" marker-end="url(#arrow)"/>
+      <path class="conn" d="M720 140 V204 Q720 212 728 212 H822" marker-end="url(#arrow)"/>
+      <path class="conn" d="M896 240 V304 Q896 312 904 312 H998" marker-end="url(#arrow)"/>
+      <path class="conn" d="M1072 284 V220 Q1072 212 1080 212 H1174" marker-end="url(#arrow)"/>
+      <rect x="1099" y="220" width="56" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="1127" y="229" class="arrow-label" font-size="8" text-anchor="middle">LATER</text>
+      <path class="conn" d="M1248 184 V120 Q1248 112 1256 112 H1350" marker-end="url(#arrow)"/>
+      <rect x="120" y="84" width="144" height="56" rx="6" fill="#f5f5f5"/>
+      <rect class="node" x="120" y="84" width="144" height="56" rx="6"/>
+      <text x="192" y="110" class="node-name" font-size="12" text-anchor="middle">Say remember this</text>
+      <text x="192" y="126" class="sublabel" font-size="8" text-anchor="middle">you start it</text>
+      <rect x="296" y="184" width="144" height="56" rx="6" fill="#f5f5f5"/>
+      <rect class="node" x="296" y="184" width="144" height="56" rx="6"/>
+      <text x="368" y="210" class="node-name" font-size="12" text-anchor="middle">Choose a type</text>
+      <text x="368" y="226" class="sublabel" font-size="8" text-anchor="middle">9 types, then a pack</text>
+      <rect x="472" y="184" width="144" height="56" rx="6" fill="#f5f5f5"/>
+      <rect class="node" x="472" y="184" width="144" height="56" rx="6"/>
+      <text x="544" y="210" class="node-name" font-size="12" text-anchor="middle">Look for a copy</text>
+      <text x="544" y="226" class="sublabel" font-size="8" text-anchor="middle">update, not duplicate</text>
+      <rect x="648" y="84" width="144" height="56" rx="6" fill="#f5f5f5"/>
+      <rect class="node focal" x="648" y="84" width="144" height="56" rx="6"/>
+      <text x="720" y="110" class="node-name focal-name" font-size="12" text-anchor="middle">Say OK</text>
+      <text x="720" y="126" class="sublabel" font-size="8" text-anchor="middle">nothing saves before it</text>
+      <rect x="824" y="184" width="144" height="56" rx="6" fill="#f5f5f5"/>
+      <rect class="node" x="824" y="184" width="144" height="56" rx="6"/>
+      <text x="896" y="210" class="node-name" font-size="12" text-anchor="middle">Write the file</text>
+      <text x="896" y="226" class="sublabel" font-size="8" text-anchor="middle">with source and dates</text>
+      <rect x="1000" y="284" width="144" height="56" rx="6" fill="#f5f5f5"/>
+      <rect class="node" x="1000" y="284" width="144" height="56" rx="6"/>
+      <text x="1072" y="310" class="node-name" font-size="12" text-anchor="middle">Rebuild indexes</text>
+      <text x="1072" y="326" class="sublabel" font-size="8" text-anchor="middle">then check the rules</text>
+      <rect x="1176" y="184" width="144" height="56" rx="6" fill="#f5f5f5"/>
+      <rect class="node" x="1176" y="184" width="144" height="56" rx="6"/>
+      <text x="1248" y="210" class="node-name" font-size="12" text-anchor="middle">List files to move</text>
+      <text x="1248" y="226" class="sublabel" font-size="8" text-anchor="middle">once a week</text>
+      <rect x="1352" y="84" width="144" height="56" rx="6" fill="#f5f5f5"/>
+      <rect class="node focal" x="1352" y="84" width="144" height="56" rx="6"/>
+      <text x="1424" y="110" class="node-name focal-name" font-size="12" text-anchor="middle">Approve the batch</text>
+      <text x="1424" y="126" class="sublabel" font-size="8" text-anchor="middle">then the moves run</text>
+      <line x1="16" y1="388" x2="1520" y2="388" stroke="rgba(45,49,66,0.10)" stroke-width="0.8" data-lint="ignore"/>
+      <text x="16" y="412" class="legend" font-size="8">LEGEND</text>
+      <rect x="96" y="402" width="16" height="12" rx="2" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" data-lint="ignore"/>
+      <text x="120" y="412" class="legend" font-size="8">YOUR OK. NOTHING IS SAVED OR MOVED BEFORE IT.</text>
+    </svg>
+    </div>
+  </main>
+</body>
+</html>
