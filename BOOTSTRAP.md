@@ -13,7 +13,10 @@ external system.
 
 1. Run `bash core/scripts/setup.sh`.
 2. Setup copies `templates/` to `local/`, makes the `work/` folders, and builds the indexes.
-3. Setup does not overwrite an existing `local/` folder.
+3. If `local/` exists, setup adds only the template files that are missing. It never
+   overwrites an existing file, and it prints each file that it adds.
+4. `local/settings/autonomy.md` has four default grants. Because of them, the `wrap-up` skill
+   records each session in `local/STATUS.md`, the logs and memory without a question.
 
 `local/` holds all personal state: status, memory, registries, logs and settings.
 `local/` and `work/` are git-ignored. Do not commit them.
@@ -23,7 +26,8 @@ external system.
 1. Write your name, pronouns and writing style in `local/settings/owner.md`.
 2. Write your name, user name and colleague names in `local/settings/privacy_patterns.txt`,
    one regular expression on each line. The validator then blocks these words in committed files.
-3. Optional: add local autonomy grants in `local/settings/autonomy.md`.
+3. Optional: review the local autonomy grants in `local/settings/autonomy.md`. Delete a row to
+   turn off that automatic record, or add a row to grant more.
 
 ## 4. Choose packs
 
@@ -64,6 +68,8 @@ Set these in your runtime scheduler. They only read and report. They never apply
 ## 9. Updates
 
 1. Run `git pull`. Your `local/` and `work/` folders do not change.
-2. Run `bash core/scripts/setup.sh` again. It keeps `local/` and makes new work folders and indexes.
-3. If `templates/` has a new file, copy it into `local/` by hand.
+2. Run `bash core/scripts/setup.sh` again. It keeps your files in `local/` and makes new work
+   folders and indexes.
+3. Setup also adds each new file from `templates/` that is missing in `local/`. It never
+   overwrites an existing file.
 4. Run the validator.

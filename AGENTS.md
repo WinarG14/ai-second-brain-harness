@@ -58,10 +58,14 @@ item. Never edit a generated file. Personal state goes only in `local/`. Deliver
 - Verify that a tool works in the current session before you rely on it. A past result is not
   evidence. If a tool is not available, use an authorized fallback or make a labelled draft.
 - Use subagents only when the user or a skill authorizes them.
+- Write text files as UTF-8. In Windows PowerShell 5.1, pass `-Encoding utf8` to `Set-Content`
+  and `Out-File`, because their default code page turns non-ASCII letters into "?".
 
 ## Session wrap-up
 
-For real work, use the `wrap-up` skill. Skip it for a short question.
+After real work, always run the `wrap-up` skill automatically, without asking first. Its granted
+records in `local/settings/autonomy.md` need no confirmation. Skip it only for a short question
+with no lasting result.
 
 ## Verification and done
 

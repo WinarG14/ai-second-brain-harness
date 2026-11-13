@@ -1,11 +1,23 @@
 #!/usr/bin/env bash
 # One-time setup for a new user. Copies templates/ to local/ (personal state, git-ignored),
 # makes the work/ folders that workspace.yaml lists, then builds the indexes and the boot card.
-# It never overwrites an existing local/ folder.
+# If local/ exists, it adds only the template files that are missing and never overwrites a file.
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 if [ -e "$ROOT/local" ]; then
-  echo "local/ exists. Setup does not overwrite it. Remove it first if you want a fresh copy."
+  echo "local/ exists. Setup adds missing template files only and overwrites nothing."
+  added=0
+  while IFS= read -r -d '' src; do
+    rel="${src#"$ROOT/templates/"}"
+    dest="$ROOT/local/$rel"
+    if [ ! -e "$dest" ]; then
+      mkdir -p "$(dirname "$dest")"
+      cp "$src" "$dest"
+      echo "added: local/$rel"
+      added=$((added + 1))
+    fi
+  done < <(find "$ROOT/templates" -type f ! -name .gitkeep -print0)
+  echo "Added $added missing template file(s)."
 else
   cp -R "$ROOT/templates" "$ROOT/local"
   find "$ROOT/local" -name .gitkeep -delete

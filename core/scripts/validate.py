@@ -175,6 +175,9 @@ def main() -> int:
     fails += scan_personal()  # rule 4
     fails += core_standalone()
 
+    for rel in ('local/settings/autonomy.md', 'local/settings/owner.md'):
+        if not (ROOT / rel).is_file():
+            print(f'WARN {rel} is missing. Run bash core/scripts/setup.sh to restore it.')
     for f in fails:
         print(f'FAIL {f}')
     n = sum(len(pack_files(p)) for p in packs if not p.name.startswith('_'))

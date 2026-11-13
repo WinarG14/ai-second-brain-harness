@@ -7,6 +7,7 @@ Read once per session. Policy: `AGENTS.md`. Approval gates: `core/policy/approva
 
 - External writes (email, chat, tickets, shared docs, pushes, publishing) are confirm-first.
 - Local writes are confirm-first, except the grants in `local/settings/autonomy.md`.
+- After real work, run `wrap-up` automatically; never skip it.
 - Never write personal data outside `local/`. Run `core/scripts/validate.py` before a commit.
 
 ## Active packs
