@@ -1,0 +1,8 @@
+name: general
+scope: Knowledge and processes that do not fit a domain pack yet
+owner: workspace owner
+status: active
+requires:
+  connectors: []
+  external: []
+triggers: [general, misc, other]

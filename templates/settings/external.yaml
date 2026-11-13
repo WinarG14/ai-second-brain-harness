@@ -1,0 +1,3 @@
+# Paths to external sources that packs can require (pack.yaml requires.external).
+# Example:
+# shared_folder: ~/path/to/shared/folder

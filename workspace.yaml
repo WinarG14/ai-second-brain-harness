@@ -1,0 +1,17 @@
+# Workspace settings. Shared and committed: put no personal data here.
+# Personal settings go in local/settings/ (git-ignored).
+
+active_packs:            # packs that the router, the boot card and find-knowledge use
+  - general               # turn on more packs below. Make more packs from packs/_template
+
+work_root: work          # deliverables folder (git-ignored)
+pack_work_folders: false # true: use the work_folders that active packs offer instead of the list below
+work_folders:            # generic default, made by core/scripts/setup.py
+  - 00_inbox
+  - 10_projects
+  - 20_research
+  - 90_archive
+
+runtime:
+  claude: true           # .claude/skills pointers are generated
+  codex: true            # .agents/skills pointers are generated
