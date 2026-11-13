@@ -59,8 +59,9 @@ item. Never edit a generated file. Personal state goes only in `local/`. Deliver
 - Verify that a tool works in the current session before you rely on it. A past result is not
   evidence. If a tool is not available, use an authorized fallback or make a labelled draft.
 - Use subagents only when the user or a skill authorizes them.
-- Write text files as UTF-8. In Windows PowerShell 5.1, pass `-Encoding utf8` to `Set-Content`
-  and `Out-File`, because their default code page turns non-ASCII letters into "?".
+- Write text files as UTF-8 without a byte-order mark (BOM). In Windows PowerShell 5.1, do not use
+  `Set-Content` or `Out-File`: their default turns non-ASCII letters into "?", and `-Encoding utf8`
+  adds a BOM. Use `[IO.File]::WriteAllText($path, $text, [Text.UTF8Encoding]::new($false))`.
 
 ## Session wrap-up
 

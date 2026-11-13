@@ -57,7 +57,7 @@ def parse_yaml(text: str) -> dict:
 
 
 def frontmatter(path: Path) -> dict | None:
-    text = path.read_text(encoding='utf-8')
+    text = path.read_text(encoding='utf-8-sig')  # a PowerShell 5.1 file can start with a BOM
     if not text.startswith('---\n'):
         return None
     end = text.find('\n---', 4)

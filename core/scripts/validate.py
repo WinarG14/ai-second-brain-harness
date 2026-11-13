@@ -37,7 +37,7 @@ def private_patterns() -> list[tuple[str, re.Pattern]]:
     f = ROOT / 'local/settings/privacy_patterns.txt'
     if not f.is_file():
         return []
-    lines = [x.strip() for x in f.read_text(encoding='utf-8').splitlines()]
+    lines = [x.strip() for x in f.read_text(encoding='utf-8-sig').splitlines()]
     return [('private pattern', re.compile(x, re.I)) for x in lines if x and not x.startswith('#')]
 
 
